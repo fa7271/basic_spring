@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상세보기</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        #update-form{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="member/header :: headerFragment"></div>
+<table>
+    <tr>
+        <td>name</td>
+        <td>email</td>
+        <td>password</td>
+        <td>created_Date</td>
+    </tr>
+    <!--    -->
+    <tr th:each="memberRestDto:${memberList}">
+        <td th:text="${memberRestDto.name}"></td>
+        <td th:text="${memberRestDto.email}"></td>
+        <td th:text="${memberRestDto.password}"></td>
+        <td th:text="${memberRestDto.create_time}"></td>
+    </tr>
+</table>
+<button on onclick="showupdateform()">수정</button>
+<button><a th:href="@{/member/delete(id=${memberList.id})}">삭제</a></button>
+<div id="update-form">
+    <form id="myform" action="/member/update" method="POST"> <!-- form 형식 기본 -->
+        <p>id : <input type="text" id="id" name="id" th:value="${memberList.id}" readonly></p>
+        <p>name : <input type="text" id="name" name="name" th:value="${memberList.name}"></p>
+        <p>email : <input type="text" id="email" name="email" th:value="${memberList.email}" readonly></p>
+        <p>password : <input type="password" id="password" name="password" th:value="${memberList.password}"></p>
+        <p><input type="submit" value="수정완료"></p>
+    </form>
+</div>
+<script>
+    function showupdateform(){
+        document.getElementById('update-form').style.display = 'block';
+    }
+</script>
+</body>
+</html>

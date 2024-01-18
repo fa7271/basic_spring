@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div th:replace="member/header :: headerFragment"></div>
+<table>
+    <tr>
+        <td>이름</td>
+        <td>이메일</td>
+        <td>패스워드</td>
+    </tr>
+    <tr th:each="memberRestDto:${memberList}">
+        <td th:text="${memberRestDto.name}"></td>
+        <td th:text="${memberRestDto.email}"></td>
+<!--        member?id==xx 방식으로 요청-->
+<!--        @는 th의 링크 url표현식-->
+        <td><a th:href = "@{/member/find(id=${memberRestDto.id})}" >상세보기</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

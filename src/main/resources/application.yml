@@ -1,0 +1,50 @@
+#Application.properties? ??
+
+#server.port=8081
+#spring.datasource.url=jdbc:mariadb://localhost:3306/member
+#spring.datasource.username=root
+#spring.datasource.password=sb813792!!
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/basic
+    username: root
+    password: sb813792!!
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true # ???? ?? ?? ????. ???, ??? ???? ?? ???.
+    hibernate:
+#      create ??? ?? table? drop? ??
+#      update ??? ????? alter? ??
+#      validate ??? ??DB?? ???? check
+#      ????? update, validate ??
+      ddl-auto: update
+    show-sql: true # jpa? ???? ??? ????, ??? console?? ???? ??
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+# yml ??
+# ????? ????? ????.
+
+#spring:
+##  profiles:
+##    active: dev
+#  datasource:
+#    url: jdbc:mariadb://localhost:3306/member
+#    username: root
+#    password: sb813792!!
+#
+#---
+#spring:
+#  #  profiles:
+#  #    active: pro
+#  datasource:
+#    url: jdbc:mariadb://localhost:3307/member
+#    username: root
+#    password: sb813792!!
+#
+##    --- ? ?? ????? ?? ? ??.

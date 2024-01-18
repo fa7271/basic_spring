@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello json screen</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div th:replace="member/header :: headerFragment"></div>
+<form id="myform" action="/members/create" method="POST"> <!-- form 형식 기본 -->
+    <p>name : <input type="text" id ="name" name="name"></p>
+    <p>email : <input type="text"  id ="email" name="email"></p>
+    <p>password : <input type="password"  id ="password" name="password"></p>
+    <p><button type="submit">제출</button></p>
+</form>
+</body>
+
+</html>
