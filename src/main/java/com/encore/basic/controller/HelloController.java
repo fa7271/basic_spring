@@ -1,11 +1,15 @@
 package com.encore.basic.controller;
 
 import com.encore.basic.domain.Hello;
+import com.fasterxml.jackson.core.util.BufferRecycler;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.tomcat.jni.Buffer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -27,6 +31,7 @@ public class HelloController {
 //        screen.html찾으러 출발
         return "screen";
     }
+
     @GetMapping("screen-model-param")
 //    ? name = hongildong 의 방식으로 호출 ( 파라미터 호출 방식 )
     public String helloScreenModel(Model model, @RequestParam(value = "name") String name) {
@@ -85,8 +90,6 @@ public class HelloController {
     }
 
 
-
-
     //    json데이터 처리
     @GetMapping("json-screen")
     public String jsonScreen() {
@@ -123,7 +126,7 @@ public class HelloController {
         return "ok";
     }
 
-//    💎그냥 객체로 받기 > 이거 사용
+    //    💎그냥 객체로 받기 > 이거 사용
 //    Spring 에서 Hello 클래스의 인스턴스를 자동 매핑하여 생성
 //    form-data 형식, 즉 x-www-url 인코딩 형식의 경우 사용
 //    이를 데이터 바인딩이라고 부른다. (Hello 클래스의 Setter 필수)
@@ -132,5 +135,30 @@ public class HelloController {
     public String jsonPostHandle3(@RequestBody Hello hello) {
         System.out.println(hello);
         return "ok";
+    }
+
+    @PostMapping("httpservlet")
+    @ResponseBody
+    public String HttpServletTest(HttpServletRequest req) {
+//        HttpServletRequest객체에서 header정보 추출
+        System.out.println(req.getContentType());
+        System.out.println(req.getMethod());
+
+//        session: 로그인(auth) 정보에서 필요한 정보값을 추출할때 많이 사용
+        System.out.println(req.getSession());
+        System.out.println(req.getHeader("Accept"));
+
+//        HttpServletRequest객체에서 header정보 추출
+        System.out.println(req.getParameter("test1"));
+        System.out.println(req.getParameter("test2"));
+//        req.getReader() 를 통해 BufferedReader로 받아 직접 파싱 // 할 일 없음
+
+        return "OK";
+    }
+
+    @GetMapping("/hello-servlet-jsp-get")
+    public String helloServletJspGet(Model model) {
+        model.addAttribute("myData", "jsp test data");
+        return "hello-jsp";
     }
 }

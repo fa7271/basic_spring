@@ -41,6 +41,15 @@ dependencies {
 
 //	mybtis 관련 의존성 추가
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
+//	jsp를 위한 라이브러리 추
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+//  jstl문법 사용시 아래 의존성 추가
+//	implementation 'javax.servlet:jstl'
+
+//	swagger
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 }
 
 tasks.named('test') {

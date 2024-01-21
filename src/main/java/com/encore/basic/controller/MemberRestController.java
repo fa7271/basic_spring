@@ -4,6 +4,7 @@ import com.encore.basic.domain.Member;
 import com.encore.basic.domain.MemberRequestDto;
 import com.encore.basic.domain.MemberResponseDto;
 import com.encore.basic.service.MemberService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest")
+@Api(tags ="회원관리서비스")
 public class MemberRestController {
     private final MemberService memberService;
 
@@ -26,6 +30,7 @@ public class MemberRestController {
     }
 
     @PostMapping("members/create")
+//    프론트에서 데이터 넘겨줌, REST에서는 {}에 담아서 넣어줌
     public String memberCreate(@RequestBody MemberRequestDto memberRequestDto) {
         memberService.memberCreate(memberRequestDto);
         return "ok";
@@ -39,7 +44,6 @@ public class MemberRestController {
     @GetMapping("/member/find/{id}")
     public ResponseEntity<Map<String, Object>> memberFind(@PathVariable int id) {
         MemberResponseDto memberResponseDto = null;
-
         try {
             memberResponseDto = memberService.findById(id);
             return ResponseEntityController.ResponseMessage(HttpStatus.OK, memberResponseDto);

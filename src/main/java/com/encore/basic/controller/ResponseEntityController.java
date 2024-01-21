@@ -2,6 +2,8 @@ package com.encore.basic.controller;
 
 import com.encore.basic.domain.Member;
 import com.encore.basic.domain.MemberResponseDto;
+import com.encore.basic.repository.SpringDataJpaMemberRepository;
+import com.encore.basic.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
