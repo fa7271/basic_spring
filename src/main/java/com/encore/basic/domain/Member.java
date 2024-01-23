@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 //@AllArgsConstructor // 모든 매개변수를 넣은 생성자
 @Entity
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor // reflections 기술을 통해 접근을 할 수 있는데, 깡통 객체가 있어야지 접근이 가능하다.
 public class Member {
     @Setter
     @Id // pk 설정
